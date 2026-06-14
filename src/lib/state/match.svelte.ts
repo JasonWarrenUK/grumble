@@ -48,10 +48,9 @@ function createMatch() {
 		return m;
 	});
 
-	// Persist to localStorage whenever state changes (runs client-side only).
-	$effect(() => {
+	function persist() {
 		saveMatch({ version: 1, names, hands, games, rules, presetId });
-	});
+	}
 
 	return {
 		// reads
@@ -92,12 +91,15 @@ function createMatch() {
 		// mutations
 		setName(p: PlayerId, value: string) {
 			names = { ...names, [p]: value };
+			persist();
 		},
 		addHand(hand: Hand) {
 			hands = [...hands, hand];
+			persist();
 		},
 		removeHand(index: number) {
 			hands = hands.filter((_, i) => i !== index);
+			persist();
 		},
 		bankGame() {
 			games = [
@@ -112,6 +114,7 @@ function createMatch() {
 				}
 			];
 			hands = [];
+			persist();
 		},
 		/** Apply a named preset. Passing 'custom' keeps the current rules (user edits from here). */
 		applyPreset(id: PresetId) {
@@ -119,16 +122,19 @@ function createMatch() {
 			if (id !== 'custom') {
 				rules = { ...PRESETS[id].rules };
 			}
+			persist();
 		},
 		/** Update a single rule value. Switches presetId to 'custom'. */
 		setRule<K extends keyof Rules>(key: K, value: number) {
 			rules = { ...rules, [key]: value };
 			presetId = 'custom';
+			persist();
 		},
 		/** Clear hands and banked games; keep names and rules. */
 		resetMatch() {
 			hands = [];
 			games = [];
+			persist();
 		}
 	};
 }
