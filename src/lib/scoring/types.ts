@@ -1,13 +1,5 @@
-// Scoring rules. Tweak these to reskin the variant.
-
-export const RULES = {
-	GIN_BONUS: 25,
-	BIG_GIN_BONUS: 50,
-	UNDERCUT_BONUS: 25,
-	LINE_BONUS: 25, // per hand won, applied at game end
-	GAME_BONUS: 100,
-	GAME_TARGET: 100 // a game ends once a player's running total crosses this
-} as const;
+// Scoring rule values live in rules.ts as the `Rules` interface + `DEFAULT_RULES`.
+// Domain types only here.
 
 export type PlayerId = 0 | 1;
 
