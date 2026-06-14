@@ -6,10 +6,10 @@ totals, line/game bonuses, and multi-game match history.
 ## Setup
 
 ```bash
-npm install
-npm run dev      # dev server
-npm test         # vitest — scoring unit tests
-npm run check    # svelte-check
+bun install
+bun dev          # dev server
+bun test         # bun:test — scoring unit tests
+bun run check    # svelte-check
 ```
 
 ## Structure

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'bun:test';
 import { scoreHand, tallyHands, finalScore } from './score';
 import { RULES, type Hand, type PlayerId } from './types';
 
@@ -42,14 +42,14 @@ describe('scoreHand', () => {
 describe('tallyHands + finalScore', () => {
 	it('accumulates running totals and counts lines per box winner', () => {
 		const hands: Hand[] = [
-			{ type: 'gin', winner: 0, knockerDeadwood: 0, oppDeadwood: 10 }, // A +35
-			{ type: 'knock', winner: 1, knockerDeadwood: 5, oppDeadwood: 5 } // undercut -> A +25
+			{ type: 'gin', winner: 0, knockerDeadwood: 0, oppDeadwood: 10 }, // A +35 (10 + GIN_BONUS 25)
+			{ type: 'knock', winner: 1, knockerDeadwood: 5, oppDeadwood: 5 } // equal deadwood: undercut, A +25
 		];
 		const { running, lines } = tallyHands(hands, names);
-		expect(running[0]).toBe(35);
-		expect(running[1]).toBe(RULES.UNDERCUT_BONUS);
-		expect(lines[0]).toBe(1);
-		expect(lines[1]).toBe(1);
+		expect(running[0]).toBe(35 + RULES.UNDERCUT_BONUS); // gin pts + undercut pts
+		expect(running[1]).toBe(0);
+		expect(lines[0]).toBe(2); // A wins both boxes
+		expect(lines[1]).toBe(0);
 	});
 
 	it('applies line and game bonuses at game end', () => {
