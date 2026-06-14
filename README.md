@@ -1,4 +1,4 @@
-# The Tally — Gin Rummy scorer
+# Grumble — Gin Rummy scorer
 
 SvelteKit + Svelte 5 (runes). Hand-by-hand scoring with deadwood calc, running
 totals, line/game bonuses, and multi-game match history.
