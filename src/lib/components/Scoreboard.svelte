@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { match } from '$lib/state/match.svelte';
-	import { RULES } from '$lib/scoring/types';
 	import type { PlayerId } from '$lib/scoring/types';
 
 	const players: PlayerId[] = [0, 1];
@@ -27,7 +26,7 @@
 {#if match.gameOver}
 	<div class="game-over">
 		<span>
-			{match.names[match.gameWinner]} crosses {RULES.GAME_TARGET}. With bonuses:
+			{match.names[match.gameWinner]} crosses {match.rules.GAME_TARGET}. With bonuses:
 			{match.names[0]}
 			{match.preview[0]} · {match.names[1]}
 			{match.preview[1]}
@@ -67,9 +66,15 @@
 	}
 	.score {
 		font-family: var(--font-display);
-		font-size: 54px;
+		font-size: var(--fs-score);
 		line-height: 1;
 		color: var(--gold);
+	}
+
+	@media (max-width: 360px) {
+		.player {
+			padding: 12px 8px;
+		}
 	}
 	.subline {
 		font: 12px var(--font-mono);

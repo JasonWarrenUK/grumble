@@ -8,10 +8,27 @@
 	--cream: #f3ecd8;
 	--ink: #0d1f17;
 
-	/* type */
+	/* typography */
 	--font-display: 'DM Serif Display', serif;
 	--font-sans: 'DM Sans', sans-serif;
 	--font-mono: 'DM Mono', monospace;
+
+	/* fluid display sizes — upper bounds match the previous fixed values so desktop is unchanged */
+	--fs-display: clamp(30px, 9vw, 42px);
+	--fs-score: clamp(38px, 13vw, 54px);
+
+	/* spacing scale */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-6: 24px;
+	--space-8: 32px;
+
+	/* border radii */
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
 }
 
 * {
