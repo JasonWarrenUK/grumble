@@ -60,7 +60,8 @@
 	}
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(7, 1fr);
+		/* Reflows gracefully on narrow phones; stays a single row on desktop. */
+		grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
 		gap: 6px;
 	}
 	.card {

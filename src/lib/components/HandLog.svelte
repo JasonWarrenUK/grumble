@@ -7,7 +7,7 @@
 	<section class="log">
 		<div class="head">This game</div>
 		{#each match.hands as hand, i (i)}
-			{@const result = scoreHand(hand, match.names)}
+			{@const result = scoreHand(hand, match.names, match.rules)}
 			{@const w = result.pts[0] > result.pts[1] ? 0 : 1}
 			<div class="row">
 				<span class="num">{i + 1}</span>
@@ -16,6 +16,11 @@
 				<button class="del" aria-label="delete hand" onclick={() => match.removeHand(i)}>×</button>
 			</div>
 		{/each}
+	</section>
+{:else if !match.gameOver}
+	<section class="log empty">
+		<div class="head">This game</div>
+		<p class="hint">No hands yet — record the first hand above to start scoring.</p>
 	</section>
 {/if}
 
@@ -26,12 +31,20 @@
 		padding: 14px;
 		margin-bottom: 14px;
 	}
+	.log.empty {
+		opacity: 0.5;
+	}
 	.head {
 		font: 11px var(--font-mono);
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
 		color: var(--gold);
 		margin-bottom: 10px;
+	}
+	.hint {
+		font: 12px var(--font-mono);
+		opacity: 0.7;
+		margin: 0;
 	}
 	.row {
 		display: flex;
