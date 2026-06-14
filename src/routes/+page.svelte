@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { RULES } from '$lib/scoring/types';
+	import { match } from '$lib/state/match.svelte';
 	import Scoreboard from '$lib/components/Scoreboard.svelte';
 	import HandEntry from '$lib/components/HandEntry.svelte';
 	import HandLog from '$lib/components/HandLog.svelte';
 	import MatchHistory from '$lib/components/MatchHistory.svelte';
+	import HelpPanel from '$lib/components/HelpPanel.svelte';
+	import SetupPanel from '$lib/components/SetupPanel.svelte';
 </script>
 
 <svelte:head>
@@ -14,10 +16,12 @@
 	<header>
 		<div class="suit">♠ ♥ ♦ ♣</div>
 		<h1>Gin Rummy</h1>
-		<div class="target">game to {RULES.GAME_TARGET}</div>
+		<div class="target">game to {match.rules.GAME_TARGET}</div>
 	</header>
 
+	<SetupPanel />
 	<Scoreboard />
+	<HelpPanel />
 	<HandEntry />
 	<HandLog />
 	<MatchHistory />
@@ -45,7 +49,7 @@
 	}
 	h1 {
 		font-family: var(--font-display);
-		font-size: 42px;
+		font-size: var(--fs-display);
 		margin: 4px 0 0;
 		color: var(--cream);
 	}
